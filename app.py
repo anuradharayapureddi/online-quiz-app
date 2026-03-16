@@ -4,18 +4,28 @@ import random
 app = Flask(__name__)
 
 questions = [
-    {"question":"Capital of India?","options":["Mumbai","Delhi","Chennai","Kolkata"],"answer":"Delhi"},
-    {"question":"2 + 2 = ?","options":["3","4","5","6"],"answer":"4"},
-    {"question":"Largest planet?","options":["Earth","Mars","Jupiter","Venus"],"answer":"Jupiter"},
-    {"question":"HTML stands for?","options":["Hyper Text Markup Language","High Text Machine Language","Home Tool Markup Language","None"],"answer":"Hyper Text Markup Language"},
-    {"question":"Python is?","options":["Snake","Programming Language","Game","Browser"],"answer":"Programming Language"},
-    {"question":"CSS used for?","options":["Styling","Database","Server","Security"],"answer":"Styling"},
-    {"question":"Sun is a?","options":["Planet","Star","Moon","Asteroid"],"answer":"Star"},
-    {"question":"Water formula?","options":["H2O","CO2","O2","NaCl"],"answer":"H2O"},
-    {"question":"CPU full form?","options":["Central Processing Unit","Computer Power Unit","Central Program Unit","None"],"answer":"Central Processing Unit"},
-    {"question":"JS stands for?","options":["Java Style","JavaScript","Just Script","None"],"answer":"JavaScript"}
+    
+    {"question":"Capital of France?","options":["Paris","Rome","Berlin","Madrid"],"answer":"Paris"},
+    {"question":"Largest ocean on Earth?","options":["Atlantic","Indian","Arctic","Pacific"],"answer":"Pacific"},
+    {"question":"Who wrote 'Romeo and Juliet'?","options":["Shakespeare","Tolstoy","Hemingway","Dickens"],"answer":"Shakespeare"},
+    {"question":"Smallest prime number?","options":["0","1","2","3"],"answer":"2"},
+    {"question":"Fastest land animal?","options":["Cheetah","Lion","Tiger","Horse"],"answer":"Cheetah"},
+    {"question":"The Great Wall is located in?","options":["China","India","Egypt","Mexico"],"answer":"China"},
+    {"question":"Which planet is called the Red Planet?","options":["Mars","Venus","Jupiter","Saturn"],"answer":"Mars"},
+    {"question":"Which country is famous for the Eiffel Tower?","options":["France","Italy","Spain","Germany"],"answer":"France"},
+    {"question":"Currency of Japan?","options":["Yen","Dollar","Euro","Rupee"],"answer":"Yen"},
+    {"question":"How many continents are there on Earth?","options":["5","6","7","8"],"answer":"7"},
+    {"question":"Largest mammal?","options":["Elephant","Blue Whale","Giraffe","Hippopotamus"],"answer":"Blue Whale"},
+    {"question":"Who painted the Mona Lisa?","options":["Leonardo da Vinci","Picasso","Van Gogh","Michelangelo"],"answer":"Leonardo da Vinci"},
+    {"question":"Hottest planet in the solar system?","options":["Mercury","Venus","Mars","Jupiter"],"answer":"Venus"},
+    {"question":"Which element has the chemical symbol 'O'?","options":["Oxygen","Gold","Silver","Iron"],"answer":"Oxygen"},
+    {"question":"World’s longest river?","options":["Nile","Amazon","Yangtze","Mississippi"],"answer":"Nile"},
+    {"question":"Who invented the telephone?","options":["Alexander Graham Bell","Thomas Edison","Nikola Tesla","Guglielmo Marconi"],"answer":"Alexander Graham Bell"},
+    {"question":"Tallest mountain in the world?","options":["K2","Everest","Kangchenjunga","Lhotse"],"answer":"Everest"},
+    {"question":"Which gas do plants absorb from the atmosphere?","options":["Oxygen","Carbon Dioxide","Nitrogen","Helium"],"answer":"Carbon Dioxide"},
+    {"question":"Largest desert in the world?","options":["Sahara","Gobi","Kalahari","Antarctic Desert"],"answer":"Antarctic Desert"},
+    {"question":"How many planets are in the Solar System?","options":["7","8","9","10"],"answer":"8"}
 ]
-
 @app.route("/")
 def quiz():
     random.shuffle(questions)
