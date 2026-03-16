@@ -16,20 +16,22 @@ questions = [
     {"question":"JS stands for?","options":["Java Style","JavaScript","Just Script","None"],"answer":"JavaScript"}
 ]
 
-random.shuffle(questions)
-
 @app.route("/")
 def quiz():
+    random.shuffle(questions)
     return render_template("quiz.html", questions=questions)
 
 @app.route("/submit", methods=["POST"])
 def submit():
     score = 0
-    for i, q in enumerate(questions):
+    for i,q in enumerate(questions):
         ans = request.form.get(f"q{i}")
         if ans == q["answer"]:
             score += 1
-    return render_template("result.html", score=score, total=len(questions), questions=questions)
+    return render_template("result.html", score=score, total=len(questions))
 
+# ------------- RENDER READY -----------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
