@@ -1,97 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Online Quiz</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Online Quiz</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <h1>Online Quiz</h1>
 
-<div id="timer" style="color:white;font-size:20px;margin-top:10px;">
-    Time Left: <span id="time">30</span>s
-</div>
-
-<form action="/submit" method="POST" id="quizForm">
+<form action="/submit" method="POST">
 
 {% for q in questions %}
 {% set qindex = loop.index0 %}
 
 <div class="slide">
-    <h3>Question {{loop.index}} / {{questions|length}}</h3>
-    <p>{{q.question}}</p>
-    {% for option in q.options %}
-        <label>
-            <input type="radio" name="q{{qindex}}" value="{{option}}">
-            {{option}}
-        </label>
-    {% endfor %}
-</div>
+<h3>Question {{loop.index}} / {{questions|length}}</h3>
+<p>{{q.question}}</p>
 
+{% for option in q.options %}
+<label>
+<input type="radio" name="q{{qindex}}" value="{{option}}" required>
+{{option}}
+</label>
+<br>
+{% endfor %}
+
+</div>
 {% endfor %}
 
 <div class="buttons">
-    <button type="button" id="prevBtn" onclick="prev()">Previous</button>
-    <button type="button" id="nextBtn" onclick="next()">Next</button>
-    <button type="submit" id="submitBtn">Submit</button>
+<button type="button" onclick="prev()">Previous</button>
+<button type="button" onclick="next()">Next</button>
+<button type="submit">Submit</button>
 </div>
 
 </form>
 
 <script>
-let slides = document.querySelectorAll(".slide");
-let current = 0;
-const submitBtn = document.getElementById("submitBtn");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const timerSpan = document.getElementById("time");
-
-let timeLeft = 30;
+let slides = document.querySelectorAll(".slide")
+let current = 0
 let timer;
 
-// Function to start timer for each question
-function startTimer() {
-    clearInterval(timer);
-    timeLeft = 30;
-    timerSpan.textContent = timeLeft;
-    timer = setInterval(() => {
-        if(timeLeft <= 0){
-            clearInterval(timer);
-            next(); // auto next question
-        } else {
-            timeLeft--;
-            timerSpan.textContent = timeLeft;
-        }
-    }, 1000);
-}
-
 function showSlide(n){
-    slides.forEach(slide => slide.style.display="none");
-    slides[n].style.display="block";
+    slides.forEach(slide => slide.style.display="none")
+    slides[n].style.display="block"
 
-    // Buttons visibility
-    prevBtn.style.display = (n === 0) ? "none" : "inline";
-    nextBtn.style.display = (n === slides.length - 1) ? "none" : "inline";
-    submitBtn.style.display = (n === slides.length - 1) ? "inline" : "none";
-
-    startTimer(); // start timer whenever slide changes
+    // Start 30-sec timer for each question
+    clearTimeout(timer)
+    timer = setTimeout(() => { 
+        if(current < slides.length-1){ current++; showSlide(current) } 
+    }, 30000)
 }
 
-showSlide(current);
+showSlide(current)
 
 function next(){
-    if(current < slides.length - 1){
-        current++;
-        showSlide(current);
-    } else {
-        document.getElementById("quizForm").submit(); // last question -> submit
+    if(current < slides.length-1){
+        current++
+        showSlide(current)
     }
 }
 
 function prev(){
     if(current > 0){
-        current--;
-        showSlide(current);
+        current--
+        showSlide(current)
     }
 }
 </script>

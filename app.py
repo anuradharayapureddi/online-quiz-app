@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 import random
+import os
 
 app = Flask(__name__)
 
 questions = [
-    
     {"question":"Capital of France?","options":["Paris","Rome","Berlin","Madrid"],"answer":"Paris"},
     {"question":"Largest ocean on Earth?","options":["Atlantic","Indian","Arctic","Pacific"],"answer":"Pacific"},
     {"question":"Who wrote 'Romeo and Juliet'?","options":["Shakespeare","Tolstoy","Hemingway","Dickens"],"answer":"Shakespeare"},
@@ -26,6 +26,7 @@ questions = [
     {"question":"Largest desert in the world?","options":["Sahara","Gobi","Kalahari","Antarctic Desert"],"answer":"Antarctic Desert"},
     {"question":"How many planets are in the Solar System?","options":["7","8","9","10"],"answer":"8"}
 ]
+
 @app.route("/")
 def quiz():
     random.shuffle(questions)
@@ -40,8 +41,7 @@ def submit():
             score += 1
     return render_template("result.html", score=score, total=len(questions))
 
-# ------------- RENDER READY -----------------
+# ------------- Render Ready -----------------
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
